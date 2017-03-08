@@ -1,7 +1,6 @@
 
 public class Task {
 
-	
 	private double cpuReq;
 	private double memoryReq;
 

@@ -6,31 +6,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SetUp {
-		
+
+	private static final int TIME_LAPSE = 2000000000;
+	private static final int PC_NUMBER = 16000;
+
 	public static List<Task> createTaskList() {
 		String file = "resource/task-events.txt";
 		List<Task> taskList = new ArrayList<Task>();
-		
-		
+
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-		    String line;
-		    int i = 0;
-		    while ((line = br.readLine()) != null && i < 10) {
-		       System.out.println(line);
-		       i++;
-		    }
+			String line;
+			while ((line = br.readLine()) != null) {
+				String[] arrayLine = line.split(" ");
+				if (!(Integer.valueOf(arrayLine[1]) < TIME_LAPSE))
+					break;
+				else {
+					double cpuString = Float.valueOf(arrayLine[8]);
+					double memString = Float.valueOf(arrayLine[9]);
+
+					taskList.add(new Task(cpuString, memString));
+				}
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return taskList;
 	}
-	
+
 	public static List<PC> createPCList() {
 		List<PC> list = new ArrayList<PC>();
-		for (int i = 0; i < 16000; i++) {
-			list.add(new PC());
+		for (int i = 0; i < PC_NUMBER; i++) {
+			list.add(new PC(i));
 		}
 		return list;
 	}
