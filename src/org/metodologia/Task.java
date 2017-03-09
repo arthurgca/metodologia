@@ -1,20 +1,22 @@
 package org.metodologia;
 
+import java.math.BigDecimal;
+
 public class Task {
 
-	private double cpuReq;
-	private double memoryReq;
+	private BigDecimal cpuReq;
+	private BigDecimal memoryReq;
 
-	public Task(double cpuReq, double memoryReq) {
-		this.cpuReq = cpuReq;
-		this.memoryReq = memoryReq;
+	public Task(BigDecimal cpuString, BigDecimal memString) {
+		this.cpuReq = cpuString;
+		this.memoryReq = memString;
 	}
 
-	public double getMemoryReq() {
+	public BigDecimal getMemoryReq() {
 		return memoryReq;
 	}
 
-	public double getCpuReq() {
+	public BigDecimal getCpuReq() {
 		return cpuReq;
 	}
 

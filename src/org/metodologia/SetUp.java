@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +19,12 @@ public class SetUp {
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				String[] arrayLine = line.split(" ");				if (!(Integer.valueOf(arrayLine[1]) < TIME_LAPSE))
+				String[] arrayLine = line.split(" ");				
+				if (!(Integer.valueOf(arrayLine[1]) < TIME_LAPSE))
 					break;
 				else {
-					double cpuString = Float.valueOf(arrayLine[8]);
-					double memString = Float.valueOf(arrayLine[9]);
+					BigDecimal cpuString = new BigDecimal(arrayLine[8]);
+					BigDecimal memString = new BigDecimal(arrayLine[9]);
 
 					taskList.add(new Task(cpuString, memString));
 				}
