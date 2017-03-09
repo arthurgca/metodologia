@@ -1,3 +1,5 @@
+package org.metodologia;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -6,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SetUp {
-
-	private static final int TIME_LAPSE = 2000000000;
+	private static final int TIME_LAPSE = 2100000000;
 	private static final int PC_NUMBER = 16000;
 
 	public static List<Task> createTaskList() {
@@ -17,8 +18,7 @@ public class SetUp {
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				String[] arrayLine = line.split(" ");
-				if (!(Integer.valueOf(arrayLine[1]) < TIME_LAPSE))
+				String[] arrayLine = line.split(" ");				if (!(Integer.valueOf(arrayLine[1]) < TIME_LAPSE))
 					break;
 				else {
 					double cpuString = Float.valueOf(arrayLine[8]);

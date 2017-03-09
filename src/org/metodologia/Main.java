@@ -1,13 +1,9 @@
+package org.metodologia;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Main {
-
-	static List<PC> listCPU = new ArrayList<PC>();
-	static List<Task> listTask = new ArrayList<Task>();
 
 	public static void main(String[] args) {
 		String firstFit = "first-fit";
@@ -15,13 +11,8 @@ public class Main {
 		String worstFit = "worst-fit";
 		String arg = "0";
 
-		listCPU = SetUp.createPCList();
-
-		listTask = SetUp.createTaskList();
-
-		firstFit();
-
-		printUsage();
+		List<PC> listPC = FirstFit.allocate(SetUp.createPCList(), SetUp.createTaskList());
+		printUsage(listPC);
 
 		if (arg.equals(firstFit)) {
 			firstFit();
@@ -33,17 +24,6 @@ public class Main {
 	}
 
 	private static void firstFit() {
-		Iterator<Task> iteratorTask = listTask.iterator();
-
-		while (iteratorTask.hasNext()) {
-			Task currentTask = iteratorTask.next();
-			for (PC pc : listCPU) {
-				if (pc.addProcess(currentTask)) {
-					iteratorTask.remove();
-					break;
-				}
-			}
-		}
 
 	}
 
@@ -55,15 +35,16 @@ public class Main {
 
 	}
 
-	private static void printUsage() {
+	private static void printUsage(List<PC> listPC) {
 		try {
 			PrintWriter writer = new PrintWriter("pc-log.txt", "UTF-8");
 
-			for (PC pc : listCPU) {
+			for (PC pc : listPC) {
 				writer.println(
 						"PC ID: " + pc.getId() + "||| CPU STATUS: " + pc.getCpu() + " ||| MEM STATUS: " + pc.getRam());
 			}
 			writer.close();
+			System.out.println("Finished.");
 
 		} catch (IOException e) {
 			// do something

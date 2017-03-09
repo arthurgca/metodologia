@@ -1,3 +1,4 @@
+package org.metodologia;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,5 +38,10 @@ public class PC {
 
 	public int getId() {
 		return id;
+	}
+	
+	@Override
+	public String toString() {
+		return cpu+";"+ram;
 	}
 }
