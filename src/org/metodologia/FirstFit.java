@@ -1,16 +1,17 @@
 package org.metodologia;
 
 import java.util.Iterator;
-
 import java.util.List;
 
-public class FirstFit {
-	private int unnalocatedTasks; 
+public class FirstFit implements AllocationAlgorithm {
+
+	private int unnalocatedTasks;
 
 	public FirstFit() {
 		this.unnalocatedTasks = 0;
 	}
-	
+
+	@Override
 	public List<PC> allocate(List<PC> listPC, List<Task> listTask) {
 		Iterator<Task> iteratorTask = listTask.iterator();
 
@@ -23,17 +24,13 @@ public class FirstFit {
 				}
 			}
 		}
-		setUnnalocatedTasks(listTask.size());
+		this.unnalocatedTasks = listTask.size();
 		return listPC;
 	}
-	
+
+	@Override
 	public int getUnnalocatedTasks() {
 		return unnalocatedTasks;
 	}
-	
-	public void setUnnalocatedTasks(int unnalocatedTasks) {
-		this.unnalocatedTasks = unnalocatedTasks;
-	}
-	
-	
+
 }

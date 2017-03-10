@@ -1,4 +1,5 @@
 package org.metodologia;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,21 +18,11 @@ public class PC {
 		this.taskList = new ArrayList<Task>();
 	}
 
-	public BigDecimal getCpu() {
-		return cpu;
-	}
-
-	public BigDecimal getRam() {
-		return ram;
-	}
-
 	public boolean addProcess(Task task) {
 		BigDecimal restCPU = getCpu().subtract(task.getCpuReq());
 		BigDecimal restMEMORY = getRam().subtract(task.getMemoryReq());
-		
 
-		if (restCPU.compareTo(BigDecimal.ZERO) >= 0 
-				&& restMEMORY.compareTo(BigDecimal.ZERO) >= 0) {
+		if (restCPU.compareTo(BigDecimal.ZERO) >= 0 && restMEMORY.compareTo(BigDecimal.ZERO) >= 0) {
 
 			this.cpu = restCPU;
 			this.ram = restMEMORY;
@@ -41,15 +32,19 @@ public class PC {
 
 		} else
 			return false;
-		
+
+	}
+
+	public BigDecimal getCpu() {
+		return cpu;
 	}
 
 	public int getId() {
 		return id;
 	}
-	
-	@Override
-	public String toString() {
-		return cpu+";"+ram;
+
+	public BigDecimal getRam() {
+		return ram;
 	}
+	
 }

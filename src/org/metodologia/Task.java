@@ -12,12 +12,12 @@ public class Task {
 		this.memoryReq = memString;
 	}
 
-	public BigDecimal getMemoryReq() {
-		return memoryReq;
-	}
-
 	public BigDecimal getCpuReq() {
 		return cpuReq;
+	}
+
+	public BigDecimal getMemoryReq() {
+		return memoryReq;
 	}
 
 }

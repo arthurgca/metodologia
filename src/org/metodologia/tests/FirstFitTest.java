@@ -1,6 +1,6 @@
 package org.metodologia.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,6 +21,12 @@ public class FirstFitTest {
 	private BigDecimal pTrinta = new BigDecimal("0.30");
 	private BigDecimal pDez = new BigDecimal("0.10");
 
+	private void resetLists() {
+		listPC = new ArrayList<PC>();
+		listTask = new ArrayList<Task>();
+		listPCAfter = new ArrayList<PC>();
+	}
+
 	@Test
 	public void testAllocationNoRest() {
 		resetLists();
@@ -31,11 +37,11 @@ public class FirstFitTest {
 		Task t1 = new Task(pTrinta, pTrinta);
 		Task t2 = new Task(pTrinta, pTrinta);
 		Task t3 = new Task(pDez, pDez);
-		listTask.addAll(Arrays.asList(t1, t2,t3));
-		
-		//pc1 = 0.55 - 0.3 = 0.25
-		//pc2 = 0.55 - 0.3 = 0.25 , pulou pc1 por falta de espaço
-		//pc1 = 0.25 - 0.1 = 0.15
+		listTask.addAll(Arrays.asList(t1, t2, t3));
+
+		// pc1 = 0.55 - 0.3 = 0.25
+		// pc2 = 0.55 - 0.3 = 0.25 , pulou pc1 por falta de espaço
+		// pc1 = 0.25 - 0.1 = 0.15
 		listPCAfter = ff.allocate(listPC, listTask);
 		assertEquals(listPCAfter.get(0).getCpu(), new BigDecimal("0.15"));
 		assertEquals(listPCAfter.get(1).getCpu(), new BigDecimal("0.25"));
@@ -52,17 +58,17 @@ public class FirstFitTest {
 		Task t1 = new Task(pTrinta, pTrinta);
 		Task t2 = new Task(pTrinta, pTrinta);
 		Task t3 = new Task(pTrinta, pTrinta);
-		listTask.addAll(Arrays.asList(t1, t2,t3));
-		
+		listTask.addAll(Arrays.asList(t1, t2, t3));
+
 		listPCAfter = ff.allocate(listPC, listTask);
 
-		//pc1 = 0.55 - 0.30 = 0.25
-		//pc2 = 0.55 - 0.30 = 0.25
-		//não há espaço em nenhum dos dois pcs para alocar, t3 não foi alocada
+		// pc1 = 0.55 - 0.30 = 0.25
+		// pc2 = 0.55 - 0.30 = 0.25
+		// não há espaço em nenhum dos dois pcs para alocar, t3 não foi alocada
 		assertEquals(listPCAfter.get(0).getCpu(), new BigDecimal("0.25"));
 		assertEquals(listPCAfter.get(1).getCpu(), new BigDecimal("0.25"));
 	}
-	
+
 	@Test
 	public void testAllocationRest2() {
 		resetLists();
@@ -73,22 +79,16 @@ public class FirstFitTest {
 		Task t1 = new Task(pTrinta, pTrinta);
 		Task t2 = new Task(pDez, pDez);
 		Task t3 = new Task(pTrinta, pTrinta);
-		listTask.addAll(Arrays.asList(t1, t2,t3));
-		
+		listTask.addAll(Arrays.asList(t1, t2, t3));
+
 		listPCAfter = ff.allocate(listPC, listTask);
 
-		//pc1 = 0.55 - 0.3 = 0.25
-		//pc1 = 0.55 - 0.1 = 0.15
-		//pc2 = 0.55 - 0.3 = 0.25
-		//para t2 é alocada em pc1 pois ainda há espaço
+		// pc1 = 0.55 - 0.3 = 0.25
+		// pc1 = 0.55 - 0.1 = 0.15
+		// pc2 = 0.55 - 0.3 = 0.25
+		// para t2 é alocada em pc1 pois ainda há espaço
 		assertEquals(listPCAfter.get(0).getCpu(), new BigDecimal("0.15"));
 		assertEquals(listPCAfter.get(1).getCpu(), new BigDecimal("0.25"));
 	}
-	
-	private void resetLists() {
-		listPC = new ArrayList<PC>();
-		listTask = new ArrayList<Task>();
-		listPCAfter = new ArrayList<PC>();
-	}
-	
+
 }
